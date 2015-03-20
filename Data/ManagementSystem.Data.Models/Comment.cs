@@ -6,8 +6,15 @@ namespace ManagementSystem.Data.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            this.DateAdded = DateTime.Now;
+        }
+
         [Key]
         public int Id { get; set; }
+
+        public DateTime DateAdded { get; set; }
 
         public string Content { get; set; }
 

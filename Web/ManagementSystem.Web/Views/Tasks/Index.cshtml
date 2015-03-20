@@ -1,0 +1,16 @@
+﻿@using ManagementSystem.Web.ViewModels
+@model IEnumerable<TaskViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            @TempData["Success"].ToString()
+        </div>
+    </div>
+}
+

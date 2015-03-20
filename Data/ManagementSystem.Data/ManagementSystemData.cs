@@ -13,11 +13,16 @@ namespace ManagementSystem.Data
 
         private readonly Dictionary<Type, object> repositories = new Dictionary<Type, object>();
 
+        public ManagementSystemData(DbContext context)
+        {
+            this.context = context;
+        }
+
         public DbContext Context
         {
             get
             {
-                return this.Context;
+                return this.context;
             }
         }
 

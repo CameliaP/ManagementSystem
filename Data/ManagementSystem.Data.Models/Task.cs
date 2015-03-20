@@ -9,6 +9,7 @@ namespace ManagementSystem.Data.Models
     {
         public Task()
         {
+            this.CreatedOnDate = DateTime.Now;
             this.AssignedToUsers = new HashSet<User>();
             this.Comments = new HashSet<Comment>();
         }
@@ -20,7 +21,7 @@ namespace ManagementSystem.Data.Models
 
         public DateTime RequiredByDate { get; set; }
 
-        public DateTime NextActionDate { get; set; }
+        public DateTime? NextActionDate { get; set; }
 
         public string Description { get; set; }
 

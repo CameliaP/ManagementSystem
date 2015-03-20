@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace _3DMapleSystem.Web.Infrastructure.Mapping
+namespace ManagementSystem.Web.Infrastructure.Mapping
 {
     public interface IHaveCustomMappings
     {
