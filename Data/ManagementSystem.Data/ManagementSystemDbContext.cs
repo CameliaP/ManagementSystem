@@ -1,23 +1,20 @@
-﻿using System.Data.Entity;
-using ManagementSystem.Data.Models;
+﻿using ManagementSystem.Data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Linq;
-using ManagementSystem.Data.Migrations;
 
 namespace ManagementSystem.Data
 {
-    public class ManagementSystemDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public ManagementSystemDbContext()
+        public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ManagementSystemDbContext, Configuration>());
         }
 
-        public static ManagementSystemDbContext Create()
+        public static ApplicationDbContext Create()
         {
-            return new ManagementSystemDbContext();
+            return new ApplicationDbContext();
         }
     }
 }

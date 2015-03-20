@@ -5,7 +5,7 @@ namespace ManagementSystem.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ManagementSystem.Data.ManagementSystemDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ManagementSystem.Data.ApplicationDbContext>
     {
         public Configuration()
         {
@@ -14,7 +14,7 @@ namespace ManagementSystem.Data.Migrations
             this.AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(ManagementSystem.Data.ManagementSystemDbContext context)
+        protected override void Seed(ManagementSystem.Data.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -29,6 +29,23 @@ namespace ManagementSystem.Data
             }
         }
 
+        public IRepository<Task> Tasks
+        {
+            get
+            {
+                return this.GetRepository<Task>();
+            }
+        }
+
+        public IRepository<Comment> Comments
+        {
+            get
+            {
+                return this.GetRepository<Comment>();
+
+            }
+        }
+
         public void Dispose()
         {
             this.Dispose(true);
