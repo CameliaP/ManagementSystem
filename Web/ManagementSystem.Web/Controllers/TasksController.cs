@@ -73,5 +73,109 @@ namespace ManagementSystem.Web.Controllers
 
             return View(model);
         }
+
+        //GET: Edit task
+        public ActionResult Edit(int id)
+        {
+            var existingTaskModel = this.Data.Tasks
+                .All()
+                .Where(t => t.Id == id)
+                .Project()
+                .To<TaskViewModel>()
+                .FirstOrDefault();
+
+            if (existingTaskModel == null)
+            {
+                return new HttpNotFoundResult("Task not found");
+            }
+
+            //TODO If allowed to add additional properties
+
+            //if (existingTaskModel.Author != this.UserProfile.UserName)
+            //{
+            //    return new HttpNotFoundResult("You are not the author of this task!");
+            //}
+
+            return View(existingTaskModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(TaskViewModel taskModel)
+        {
+            if (taskModel != null && ModelState.IsValid)
+            {
+                var existingTask = this.Data
+                   .Tasks
+                   .GetById(taskModel.Id);
+
+                existingTask.Description = taskModel.Description;
+                existingTask.NextActionDate = taskModel.NextActionDate;
+                existingTask.Type = taskModel.Type;
+                existingTask.Status = taskModel.Status;
+
+                //existingTask.Comments = this.Data.Comments
+                //    .All()
+                //    .Where(r => r.TaskId == existingTask.Id)
+                //    .ToList();
+
+                this.Data.Tasks.Update(existingTask);
+                this.Data.SaveChanges();
+                TempData["Success"] = "The task was changed successfuly";
+                return RedirectToAction("Index", "Tasks");
+            }
+
+            return View(taskModel);
+        }
+
+
+        //GET: Delete task
+        public ActionResult Delete(int id)
+        {
+            var existingTaskModel = this.Data.Tasks
+                .All()
+                .Where(t => t.Id == id)
+                .Project()
+                .To<TaskViewModel>()
+                .FirstOrDefault();
+
+            if (existingTaskModel == null)
+            {
+                return new HttpNotFoundResult("Task not found");
+            }
+
+            //TODO If allowed to add additional properties
+
+            //if (existingTaskModel.Author != this.UserProfile.UserName)
+            //{
+            //    return new HttpNotFoundResult("You are not the author of this task!");
+            //}
+
+            return View(existingTaskModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(TaskViewModel taskModel)
+        {
+            if (taskModel != null && ModelState.IsValid)
+            {
+                var existingTask = this.Data
+                   .Tasks
+                   .GetById(taskModel.Id);
+
+                //existingTask.Comments = this.Data.Comments
+                //    .All()
+                //    .Where(r => r.TaskId == existingTask.Id)
+                //    .ToList();
+
+                this.Data.Tasks.Delete(existingTask);
+                this.Data.SaveChanges();
+                TempData["Success"] = "The task was deleted successfuly";
+                return RedirectToAction("Index", "Tasks");
+            }
+
+            return View(taskModel);
+        }
     }
 }
