@@ -22,7 +22,8 @@ namespace ManagementSystem.Web.Controllers
             var allTasks = this.Data.Tasks
                 .All()
                 .Project()
-                .To<TaskViewModel>();
+                .To<TaskViewModel>()
+                .ToList();
 
             return View(allTasks);
         }
@@ -176,6 +177,31 @@ namespace ManagementSystem.Web.Controllers
             }
 
             return View(taskModel);
+        }
+
+        //GET: Edit task
+        public ActionResult Details(int id)
+        {
+            var existingTaskModel = this.Data.Tasks
+                .All()
+                .Where(t => t.Id == id)
+                .Project()
+                .To<TaskViewModel>()
+                .FirstOrDefault();
+
+            if (existingTaskModel == null)
+            {
+                return new HttpNotFoundResult("Task not found");
+            }
+
+            //TODO If allowed to add additional properties
+
+            //if (existingTaskModel.Author != this.UserProfile.UserName)
+            //{
+            //    return new HttpNotFoundResult("You are not the author of this task!");
+            //}
+
+            return View(existingTaskModel);
         }
     }
 }

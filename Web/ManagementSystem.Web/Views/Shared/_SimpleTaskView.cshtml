@@ -1,0 +1,49 @@
+﻿@using ManagementSystem.Web.ViewModels
+@model TaskViewModel
+
+<div class="task-simple-wrapper">
+    <a href="~/Tasks/Details/@Model.Id" title="See details">
+        <div class="list-group-item">
+            <p>
+                <strong>Description: </strong> @(@Model.Description.Length > 100 ? @Model.Description.Substring(0, 100) + "..." : @Model.Description)
+            </p>
+            <hr />
+            <p>
+                Status: @Model.Status
+            </p>
+            <hr />
+            <p>
+                Type: @Model.Type
+            </p>
+            <hr />
+            <p>
+                Created on: @Model.CreatedOnDate.ToString("dd.MM.yyyy")
+            </p>
+            <hr />
+            <p>
+                Required by: @Model.RequiredByDate.ToString("dd.MM.yyyy")
+            </p>
+            <hr />
+            <p>
+                Next action on: @Model.NextActionDate
+            </p>
+            <hr />
+            <div>
+                Responsible employees:
+                @if (Model.AssignedToUsers.Count==0)
+                {
+                    <p>None</p>
+                }
+                else
+                {
+                    foreach (var user in Model.AssignedToUsers)
+                    {
+                        <p>
+                            @user.UserName
+                        </p>
+                    }
+                }
+            </div>
+        </div>
+    </a>
+</div>

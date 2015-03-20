@@ -1,7 +1,54 @@
-﻿
+﻿@using ManagementSystem.Web.ViewModels
+@model TaskViewModel
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h1>Task @Model.Id Details</h1>
+
+<div class="list-group-item">
+    <p>
+        <strong>Description: </strong> @Model.Description
+    </p>
+    <hr />
+    <p>
+        Status: @Model.Status
+    </p>
+    <hr />
+    <p>
+        Type: @Model.Type
+    </p>
+    <hr />
+    <p>
+        Created on: @Model.CreatedOnDate.ToString("dd.MM.yyyy")
+    </p>
+    <hr />
+    <p>
+        Required by: @Model.RequiredByDate.ToString("dd.MM.yyyy")
+    </p>
+    <hr />
+    <p>
+        Next action on: @Model.NextActionDate
+    </p>
+    <hr />
+    <div>
+        Responsible employees:
+        @if (Model.AssignedToUsers.Count == 0)
+        {
+            <p>None</p>
+        }
+        else
+        {
+            foreach (var user in Model.AssignedToUsers)
+            {
+                <p>
+                    @user.UserName
+                </p>
+            }
+        }
+    </div>
+</div>
+
+
 

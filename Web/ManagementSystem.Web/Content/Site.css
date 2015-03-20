@@ -28,3 +28,23 @@ textarea {
     margin-right:10px;
     display:inline;
 }
+
+#tasks-wrapper{
+    width:70%;
+}
+
+.task-simple-wrapper .list-group-item:hover{
+    background-color:#dbdbdb;
+}
+
+.task-simple-wrapper a:hover{
+    text-decoration:none;
+}
+
+hr {
+    border-top: 1px solid #b0b0b0;
+    border-bottom: 1px solid #dcdcdc;
+    margin:10px 0;
+}
+
+

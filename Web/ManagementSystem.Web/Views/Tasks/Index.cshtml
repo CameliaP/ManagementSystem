@@ -1,5 +1,7 @@
-﻿@using ManagementSystem.Web.ViewModels
-@model IEnumerable<TaskViewModel>
+﻿@using ManagementSystem.Common;
+@using ManagementSystem.Web.ViewModels
+
+@model IList<TaskViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -13,4 +15,30 @@
         </div>
     </div>
 }
+
+
+@{
+    var rows = Math.Ceiling((double)Model.Count());
+    var columns = GlobalConstants.ColumnsOnMainTaskPage;
+}
+
+<div id="tasks-wrapper">
+    <h2 class="text-center">All Tasks</h2>
+    @for (int row = 0; row < rows; row++)
+    {
+        <div class="row">
+            @for (int col = 0; col < columns; col++)
+            {
+                var currentIndex = columns * row + col;
+                if (currentIndex < Model.Count)
+                {
+                    <div class="col-md-6">
+                        @Html.Partial("_SimpleTaskView", Model[currentIndex])
+                    </div>
+                }
+            }
+        </div>
+        <br />
+    }
+</div>
 
