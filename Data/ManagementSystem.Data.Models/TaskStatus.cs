@@ -8,6 +8,6 @@ namespace ManagementSystem.Data.Models
         Opened,
         Ongoing,
         Delayed,
-        Finished,
+        Closed,
     }
 }
