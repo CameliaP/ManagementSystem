@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    $('.datetimepicker').datetimepicker({
+        format: 'MM/DD/YYYY'
+    });
     $('.edit-comment').click(function () {
         var commentContentDiv = $(this).parent().prev()
             .find('.content').first();

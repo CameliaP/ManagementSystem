@@ -18,15 +18,22 @@ namespace ManagementSystem.Web.Controllers
         }
 
         // GET: Tasks
-        public ActionResult Index()
+        public ActionResult Index(string query)
         {
+
             var allTasks = this.Data.Tasks
-                .All()
-                .Project()
+                .All();
+
+            if (!(query == null || query.Trim() == String.Empty))
+            {
+                allTasks = allTasks.Where(t => t.Comments.Any(c => c.Content.Contains(query)));
+            }
+
+            var allTasksModel = allTasks.Project()
                 .To<TaskViewModel>()
                 .ToList();
 
-            return View(allTasks);
+            return View(allTasksModel);
         }
 
         //GET: Create task
@@ -70,7 +77,7 @@ namespace ManagementSystem.Web.Controllers
                 this.Data.Tasks.Add(newTask);
                 this.Data.SaveChanges();
                 TempData["Success"] = "A new task was created";
-                return RedirectToAction("Index","Tasks");
+                return RedirectToAction("Index", "Tasks");
             }
 
             return View(model);

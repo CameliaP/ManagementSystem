@@ -16,6 +16,7 @@ namespace ManagementSystem.Web.ViewModels
         public DateTime CreatedOnDate { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime RequiredByDate { get; set; }
 
         public DateTime? NextActionDate { get; set; }
