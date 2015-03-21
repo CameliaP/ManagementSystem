@@ -94,6 +94,10 @@ p{
     display:inline-block;
 }
 
+.inline-forms>button{
+    color:#428bca;
+}
+
 .pr0{
     padding-right:0px;
 }

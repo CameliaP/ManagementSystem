@@ -45,6 +45,7 @@ namespace ManagementSystem.Web.Controllers
 
                 comment.AuthorName = this.UserProfile.UserName;
                 comment.DateAdded = DateTime.Now;
+                comment.Id = newComment.Id;
 
                 return PartialView("_CommentPartialView", comment);
             }
@@ -77,7 +78,9 @@ namespace ManagementSystem.Web.Controllers
                     return this.JsonError("Your comment contains potentially dangerous code. Edit it.");
                 }
 
-                var existingComment = this.Data.Comments.All().FirstOrDefault(c => c.Id == comment.Id);
+                var existingComment = this.Data.Comments
+                    .All()
+                    .FirstOrDefault(c => c.Id == comment.Id);
 
                 existingComment.Content = comment.Content;
 
@@ -85,6 +88,26 @@ namespace ManagementSystem.Web.Controllers
                 this.Data.SaveChanges();
 
                 return PartialView("_CommentPartialView", comment);
+            }
+
+            return this.JsonError("Unexpexted error");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Delete(int commentId)
+        {
+            var existingComment = this.Data.Comments
+                   .All()
+                   .FirstOrDefault(c => c.Id == commentId);
+
+            if (existingComment != null && ModelState.IsValid)
+            {
+                this.Data.Comments.Delete(existingComment);
+                this.Data.SaveChanges();
+
+                return new EmptyResult();
             }
 
             return this.JsonError("Unexpexted error");

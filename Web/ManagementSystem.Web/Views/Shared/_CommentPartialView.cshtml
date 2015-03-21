@@ -35,9 +35,26 @@
                 @*<a href="#" class="icon edit-comment">
                     <span class="glyphicon glyphicon glyphicon-pencil"></span>
                 </a>*@
-                <a href="#" class="icon delete-comment">
+
+                @using (Ajax.BeginForm("Delete", "Comments",
+                    new { commentId = @Model.Id },
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "comment-content-" + @Model.Id,
+                        InsertionMode = InsertionMode.ReplaceWith,
+                        OnSuccess = "successDeleteComment(this)",
+                        //OnFailure = "showCommentSanitizeError"
+                    },
+                    new { @class = "form-horizontal inline-forms", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="no-border">
+                        <i class="glyphicon glyphicon glyphicon-remove"></i>
+                    </button>
+                }
+                @*<a href="#" class="icon delete-comment">
                     <span class="glyphicon glyphicon glyphicon-remove"></span>
-                </a>
+                </a>*@
             </div>
             <div class="clearfix"></div>
         </div>

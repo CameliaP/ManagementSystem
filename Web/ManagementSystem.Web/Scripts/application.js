@@ -18,3 +18,7 @@ function successAddedComment() {
     $('#comment-error>ul>li').hide();
     $('#comment-content').val('');
 }
+
+function successDeleteComment(data) {
+    $(data).parents('.comment').remove();
+}
