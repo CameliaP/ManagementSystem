@@ -16,37 +16,52 @@
     </div>
 }
 
-
 @{
     var rows = Math.Ceiling((double)Model.Count());
     var columns = GlobalConstants.ColumnsOnMainTaskPage;
 }
-
-<div id="tasks-wrapper">
-    
-    @if (Model.Count==0)
-    {
-        <h3>There are no tasks match your criteria</h3>
-    }
-    else
-    {
-        <h2 class="text-center">Dashboard</h2>
-        for (int row = 0; row < rows; row++)
+@Html.Partial("_Search")
+<div class="row">
+    <div class="col-md-8">
+        @if (Model.Count == 0)
         {
-            <div class="row">
-                @for (int col = 0; col < columns; col++)
-                {
-                    var currentIndex = columns * row + col;
-                    if (currentIndex < Model.Count)
-                    {
-                        <div class="col-md-6">
-                            @Html.Partial("_SimpleTaskView", Model[currentIndex])
-                        </div>
-                    }
-                }
-            </div>
-            <br />
+            <h3>There are no tasks match your criteria</h3>
         }
+
+        else
+        {
+            <h2 class="text-center">Dashboard</h2>
+            for (int row = 0; row < rows; row++)
+            {
+                <div class="row">
+                    @for (int col = 0; col < columns; col++)
+                    {
+                        var currentIndex = columns * row + col;
+                        if (currentIndex < Model.Count)
+                        {
+                            <div class="col-md-6">
+                                @Html.Partial("_SimpleTaskView", Model[currentIndex])
+                            </div>
+                        }
+                    }
+                </div>
+                <br />
+            }
+        }
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    { }
+    @if (User.IsInRole(GlobalConstants.ManagerRole)){
+    <div class="col-md-3 mt100 col-md-offset-1">
+        <a href="\Tasks\Create" class="btn btn-lg pull-right btn-manager">
+            <p class="text-center">Create new task</p>
+            <h6 class="text-center">As a manager you can create new tasks</h6>
+        </a>
+        
+        <p class="pull-right text-center mt20 manager-notes">
+            See details of any task to edit or delete it.
+        </p>
+    </div>
     }
 </div>
 

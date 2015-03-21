@@ -32,8 +32,6 @@ namespace ManagementSystem.Web.ViewModels
 
         public IList<CommentViewModel> Comments { get; set; }
 
-        public ICollection<string> AllUsers { get; set; }
-
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Task, TaskViewModel>()

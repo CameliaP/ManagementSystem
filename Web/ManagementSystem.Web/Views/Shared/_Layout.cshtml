@@ -24,16 +24,27 @@
                 @Html.ActionLink("Simple Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("All tasks", "Index", "Tasks")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
+                        {
+                            <li>@Html.ActionLink("All tasks", "Index", "Tasks")</li>
+                        }
+                        
+                        else
+                        {
+                            <li>@Html.ActionLink("My tasks", "Index", "Tasks")</li>
+                        }
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
-        @Html.Partial("_Search")
+
         @RenderBody()
         <footer>
             <hr />

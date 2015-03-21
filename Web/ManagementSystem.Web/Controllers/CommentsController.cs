@@ -10,6 +10,7 @@ using AutoMapper.QueryableExtensions;
 
 namespace ManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class CommentsController : BaseController
     {
         private readonly ISanitizer sanitizer;

@@ -7,9 +7,11 @@ using ManagementSystem.Data.Models;
 using ManagementSystem.Web.ViewModels;
 using AutoMapper;
 using System.Collections.Generic;
+using ManagementSystem.Common;
 
 namespace ManagementSystem.Web.Controllers
 {
+    [Authorize]
     public class TasksController : BaseController
     {
         public TasksController(ManagementSystemData data)
@@ -20,9 +22,13 @@ namespace ManagementSystem.Web.Controllers
         // GET: Tasks
         public ActionResult Index(string query)
         {
-
             var allTasks = this.Data.Tasks
                 .All();
+
+            if (!this.User.IsInRole(GlobalConstants.ManagerRole))
+            {
+                allTasks = allTasks.Where(t => t.AssignedToUsers.Any(u => u.Id == this.UserProfile.Id));
+            }
 
             if (!(query == null || query.Trim() == String.Empty))
             {
@@ -37,6 +43,7 @@ namespace ManagementSystem.Web.Controllers
         }
 
         //GET: Create task
+        [Authorize(Roles = GlobalConstants.ManagerRole)]
         public ActionResult Create()
         {
             var complexModel = new ComplexViewModel();
@@ -54,6 +61,7 @@ namespace ManagementSystem.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.ManagerRole)]
         public ActionResult Create(ComplexViewModel model)
         {
             if (model != null && ModelState.IsValid)
@@ -84,6 +92,7 @@ namespace ManagementSystem.Web.Controllers
         }
 
         //GET: Edit task
+        [Authorize(Roles = GlobalConstants.ManagerRole)]
         public ActionResult Edit(int id)
         {
             var existingTaskModel = this.Data.Tasks
@@ -110,6 +119,7 @@ namespace ManagementSystem.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.ManagerRole)]
         public ActionResult Edit(TaskViewModel taskModel)
         {
             if (taskModel != null && ModelState.IsValid)
@@ -139,6 +149,7 @@ namespace ManagementSystem.Web.Controllers
 
 
         //GET: Delete task
+        [Authorize(Roles = GlobalConstants.ManagerRole)]
         public ActionResult Delete(int id)
         {
             var existingTaskModel = this.Data.Tasks
@@ -165,6 +176,7 @@ namespace ManagementSystem.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.ManagerRole)]
         public ActionResult Delete(TaskViewModel taskModel)
         {
             if (taskModel != null && ModelState.IsValid)
@@ -198,6 +210,11 @@ namespace ManagementSystem.Web.Controllers
             if (existingTask == null)
             {
                 return new HttpNotFoundResult("Task not found");
+            }
+
+            if (!(existingTask.AssignedToUsers.Contains(this.UserProfile) || this.User.IsInRole(GlobalConstants.ManagerRole)))
+            {
+                return new HttpNotFoundResult("It is not your task");
             }
 
             var taskModel = Mapper.Map<Task, TaskViewModel>(existingTask);

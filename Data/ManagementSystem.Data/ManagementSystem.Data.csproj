@@ -63,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ManagementSystem.Common\ManagementSystem.Common.csproj">
+      <Project>{c6cb4bf3-52bf-4380-b213-2730f9b438cd}</Project>
+      <Name>ManagementSystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ManagementSystem.Data.Common\ManagementSystem.Data.Common.csproj">
       <Project>{771e71c9-4256-4514-8a4c-3c2b892bc70f}</Project>
       <Name>ManagementSystem.Data.Common</Name>
