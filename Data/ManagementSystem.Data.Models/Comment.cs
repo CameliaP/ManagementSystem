@@ -20,10 +20,14 @@ namespace ManagementSystem.Data.Models
 
         public CommentType Type { get; set; }
 
-        public DateTime ReminderDate { get; set; }
+        public DateTime? ReminderDate { get; set; }
 
         public int TaskId { get; set; }
 
         public virtual Task Task { get; set; }
+
+        public int AuthorId { get; set; }
+
+        public virtual User Author { get; set; }
     }
 }

@@ -16,7 +16,7 @@
                                                         }
                                                     };
 
-    tagMultiSelectValues.AddRange(Model.AllUsers.Select(t => new SelectListItem { Text = t.UserName, Value = t.Id.ToString() }));
+    tagMultiSelectValues.AddRange(Model.AllUsers.Select(t => new SelectListItem { Text = t.UserName, Value = t.Id }));
 }
 
 @using (Html.BeginForm("Create", "Tasks", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))

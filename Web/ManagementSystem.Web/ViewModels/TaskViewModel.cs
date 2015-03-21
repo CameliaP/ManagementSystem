@@ -29,7 +29,7 @@ namespace ManagementSystem.Web.ViewModels
 
         public ICollection<User> AssignedToUsers { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public IList<CommentViewModel> Comments { get; set; }
 
         public ICollection<string> AllUsers { get; set; }
 

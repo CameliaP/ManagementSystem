@@ -1,0 +1,33 @@
+﻿@using ManagementSystem.Web.ViewModels
+@model CommentViewModel
+
+<div class="panel panel-party-games">
+    <div class="panel-body p0">
+        <div class="panel-heading panel-heading-add">Add comment</div>
+        <div class="media">
+            <div class="col-md-10 col-md-offset-1">
+                @using (Ajax.BeginForm("Add", "Comments",
+                    new { taskId = Model.TaskId },
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "all-comments",
+                        InsertionMode = InsertionMode.InsertAfter,
+                        OnSuccess = "changeCommentsLabel",
+                        OnFailure = "showCommentSanitizeError"
+                    },
+                    new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { id = "comment-error", @class = "text-danger" })
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control", id = "comment-content" })
+                    <br />
+                    <div class="col-md-4 col-md-offset-8 pr0">
+                        <input type="submit" class="btn btn-sm btn-block btn-success mt5 mb5" value="Add comment" id="btn-add-comment" />
+                        <div id="@Model.TaskId-@Model.PreviousCommentsCount"></div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

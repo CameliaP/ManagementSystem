@@ -7,7 +7,7 @@
 
 <h1>Task @Model.Id Details</h1>
 
-<div class="list-group-item">
+<div class="list-group-item task-details-list">
     <p>
         <strong>Description: </strong> @Model.Description
     </p>
@@ -49,6 +49,35 @@
         }
     </div>
 </div>
+<br />
+<div class="panel panel-tasks p0">
+    @if (@Model.Comments.Count() == 0)
+    {
+        <div class="panel-heading panel-heading-add text-warning" id="comments-label">
+            There are no comments
+        </div>
+        <div class="panel panel-body panel-comments-content" id="panel-comments-content">
+            <div id="all-comments"></div>
+
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-body panel-comments-content" id="panel-comments-content">
+            <div id="all-comments">
+                @foreach (var comment in @Model.Comments)
+                {
+                    @Html.Partial("_CommentPartialView", comment)
+                }
+            </div>
+        </div>
+    }
+</div>
+<br />
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("~/Views/Shared/_AddComment.cshtml", new CommentViewModel(Model.Id))
+}
 
 
 

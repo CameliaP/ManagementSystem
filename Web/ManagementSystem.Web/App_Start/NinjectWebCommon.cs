@@ -12,6 +12,8 @@ namespace ManagementSystem.Web.App_Start
     using Ninject.Web.Common;
     using System.Data.Entity;
     using ManagementSystem.Data;
+    using ManagementSystem.Data.Common.Repository;
+    using ManagementSystem.Web.Infrastructure.Sanitizer;
 
     public static class NinjectWebCommon 
     {
@@ -64,6 +66,9 @@ namespace ManagementSystem.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<DbContext>().To<ManagementSystemDbContext>();
+            kernel.Bind<IManagementSystemData>().To<ManagementSystemData>();
+            kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+            kernel.Bind<ISanitizer>().To<HtmlSanitizerAdapter>();
         }        
     }
 }

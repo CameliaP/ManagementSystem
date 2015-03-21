@@ -4,7 +4,7 @@
 <div class="task-simple-wrapper">
     <a href="~/Tasks/Details/@Model.Id" title="See details">
         <div class="list-group-item">
-            <p>
+            <p class="task-desc">
                 <strong>Description: </strong> @(@Model.Description.Length > 100 ? @Model.Description.Substring(0, 100) + "..." : @Model.Description)
             </p>
             <hr />
@@ -25,22 +25,22 @@
             </p>
             <hr />
             <p>
-                Next action on: @Model.NextActionDate
+                Next action on: @(@Model.NextActionDate==null ? "No information" : @Model.NextActionDate.ToString())
             </p>
             <hr />
-            <div>
+            <div class="pl10 pb10">
                 Responsible employees:
                 @if (Model.AssignedToUsers.Count==0)
                 {
-                    <p>None</p>
+                    <div>None</div>
                 }
                 else
                 {
                     foreach (var user in Model.AssignedToUsers)
                     {
-                        <p>
+                        <div>
                             @user.UserName
-                        </p>
+                        </div>
                     }
                 }
             </div>

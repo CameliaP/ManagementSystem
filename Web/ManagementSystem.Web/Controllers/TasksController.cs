@@ -6,6 +6,7 @@ using AutoMapper.QueryableExtensions;
 using ManagementSystem.Data.Models;
 using ManagementSystem.Web.ViewModels;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace ManagementSystem.Web.Controllers
 {
@@ -182,18 +183,17 @@ namespace ManagementSystem.Web.Controllers
         //GET: Edit task
         public ActionResult Details(int id)
         {
-            var existingTaskModel = this.Data.Tasks
+            var existingTask = this.Data.Tasks
                 .All()
                 .Where(t => t.Id == id)
-                .Project()
-                .To<TaskViewModel>()
                 .FirstOrDefault();
 
-            if (existingTaskModel == null)
+            if (existingTask == null)
             {
                 return new HttpNotFoundResult("Task not found");
             }
 
+            var taskModel = Mapper.Map<Task, TaskViewModel>(existingTask);
             //TODO If allowed to add additional properties
 
             //if (existingTaskModel.Author != this.UserProfile.UserName)
@@ -201,7 +201,10 @@ namespace ManagementSystem.Web.Controllers
             //    return new HttpNotFoundResult("You are not the author of this task!");
             //}
 
-            return View(existingTaskModel);
+            taskModel.Comments = Mapper.Map<ICollection<Comment>, IList<CommentViewModel>>(existingTask.Comments);
+
+
+            return View(taskModel);
         }
     }
 }

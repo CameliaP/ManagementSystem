@@ -7,6 +7,7 @@ namespace ManagementSystem.Data.Models
     {
         Created,
         Ongoing,
+        Overdue,
         Delayed,
         Closed,
     }
