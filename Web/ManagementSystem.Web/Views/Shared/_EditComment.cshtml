@@ -1,0 +1,28 @@
+﻿@using ManagementSystem.Web.ViewModels
+@model CommentViewModel
+<div class="media" id="comment-@Model.Id">
+    <div class="col-md-10 col-md-offset-1">
+        @using (Ajax.BeginForm("Edit", "Comments",
+                    new { taskId = Model.TaskId },
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "comment-" + @Model.Id,
+                        InsertionMode = InsertionMode.ReplaceWith,
+                        //OnSuccess = "successEditComment",
+                        //OnFailure = "showCommentSanitizeError"
+                    },
+                    new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { id = "edit-comment-error", @class = "text-danger" })
+            @Html.HiddenFor(c => c.AuthorName)
+            @Html.HiddenFor(c => c.DateAdded)
+            @Html.HiddenFor(c => c.Id)
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", id = "edit-comment-content" })
+            <div class="col-md-2 col-md-offset-10 pr0">
+                <input type="submit" class="btn btn-xs btn-block btn-success mt5 mb5" value="Save changes" id="btn-edit-comment" />
+            </div>
+        }
+
+    </div>
+</div>

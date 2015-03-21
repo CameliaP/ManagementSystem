@@ -1,4 +1,12 @@
-﻿function showCommentSanitizeError(data) {
+﻿$(document).ready(function () {
+    $('.edit-comment').click(function () {
+        var commentContentDiv = $(this).parent().prev()
+            .find('.content').first();
+        commentContentDiv.hide();
+    })
+})
+
+function showCommentSanitizeError(data) {
     $('#comment-error>ul>li').hide();
     $('<h4 class="text-danger">' + data.responseJSON.errorMessage + '</h4>')
         .insertBefore('#comment-error')
@@ -6,6 +14,7 @@
         .fadeOut();
 }
 
-function changeCommentsLabel() {
+function successAddedComment() {
     $('#comment-error>ul>li').hide();
+    $('#comment-content').val('');
 }

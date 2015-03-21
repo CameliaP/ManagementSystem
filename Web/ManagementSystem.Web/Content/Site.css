@@ -81,5 +81,19 @@ p{
      background: #f4fff1;
 }
 
+.icon:hover{
+    text-decoration:none;
+}
 
+.no-border{
+    border:0;
+    background-color:transparent;
+}
 
+.inline-forms{
+    display:inline-block;
+}
+
+.pr0{
+    padding-right:0px;
+}
