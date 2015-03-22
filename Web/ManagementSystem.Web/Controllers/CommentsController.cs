@@ -43,6 +43,9 @@ namespace ManagementSystem.Web.Controllers
                 if (comment.ReminderDate != null)
                 {
                     newComment.ReminderDate = comment.ReminderDate;
+                    var task = this.Data.Tasks.GetById(comment.TaskId);
+                    task.NextActionDate = comment.ReminderDate;
+                    this.Data.Tasks.Update(task);
                 }
 
                 this.Data.Comments.Add(newComment);

@@ -22,7 +22,21 @@
 }
 @Html.Partial("_Search")
 <div class="row">
-    <div class="col-md-8">
+    @if (User.IsInRole(GlobalConstants.ManagerRole))
+    {
+        <div class="col-md-3 mt100">
+                <a href="\Tasks\Create" class="btn btn-lg pull-right btn-manager">
+                    <p class="text-center">Create new task</p>
+                    <h6 class="text-center">As a manager you can create new tasks</h6>
+                </a>
+                <p class="pull-right text-center mt20 manager-notes">
+                    See details of any task to edit or delete it.
+                </p>
+        </div>
+        <br />
+        <br />
+    }
+    <div class="col-md-8 col-md-offset-1">
         @if (Model.Count == 0)
         {
             <h3>There are no tasks match your criteria</h3>
@@ -45,7 +59,7 @@
                         var currentIndex = columns * row + col;
                         if (currentIndex < Model.Count)
                         {
-                            <div class="col-md-6">
+                            <div class="col-md-@(12/columns)">
                                 @Html.Partial("_SimpleTaskView", Model[currentIndex])
                             </div>
                         }
@@ -55,19 +69,5 @@
             }
         }
     </div>
-    @if (User.Identity.IsAuthenticated)
-    { }
-    @if (User.IsInRole(GlobalConstants.ManagerRole))
-    {
-        <div class="col-md-3 mt100 col-md-offset-1">
-            <a href="\Tasks\Create" class="btn btn-lg pull-right btn-manager">
-                <p class="text-center">Create new task</p>
-                <h6 class="text-center">As a manager you can create new tasks</h6>
-            </a>
-
-            <p class="pull-right text-center mt20 manager-notes">
-                See details of any task to edit or delete it.
-            </p>
-        </div>
-    }
+    
 </div>

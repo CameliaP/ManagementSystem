@@ -145,7 +145,11 @@ p {
 }
 
 .text-important {
-    background-color: #ff5e5e;
+    background-color: #ff8e8e;
+}
+
+.text-emergency {
+    background-color: #ff0000;
 }
 
 .overflow-visible {

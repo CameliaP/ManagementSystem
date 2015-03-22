@@ -28,7 +28,7 @@ namespace ManagementSystem.Web.ViewModels
 
         public TaskType Type { get; set; }
 
-        public ICollection<string> AssignedToUsers { get; set; }
+        public IList<string> AssignedToUsers { get; set; }
 
         public IList<CommentViewModel> Comments { get; set; }
 

@@ -21,16 +21,16 @@
     </p>
     <hr />
     <p>
-        Created on: @Model.CreatedOnDate.ToString("dd.MM.yyyy")
+        Created on: @Model.CreatedOnDate.ToString("MM/dd/yyyy")
     </p>
     <hr />
     <p>
-        Required by: @Model.RequiredByDate.ToString("dd.MM.yyyy")
+        Required by: @Model.RequiredByDate.ToString("MM/dd/yyyy")
     </p>
     <hr />
     <p>
-        Next action on: @Model.NextActionDate
-    </p>
+        Next action on: <span id="comment-next-action-date">@(@Model.NextActionDate == null ? "None" : @Model.NextActionDate.Value.ToString("MM/dd/yyyy"))</span>
+</p>
     <hr />
     <div>
         <p>Assigned to:</p>

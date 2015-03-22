@@ -37,7 +37,9 @@ function showCommentSanitizeError(data) {
         .fadeOut();
 }
 
-function successAddedComment() {
+function successAddedComment(data) {
+    var newReminderDate = $(data).find('#ReminderDate').val();
+    $('#comment-next-action-date').text(newReminderDate);
     $('#comment-error>ul>li').hide();
     $('#comment-content').val('');
     $('#comments-label').html('');
