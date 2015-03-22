@@ -33,7 +33,7 @@
     </p>
     <hr />
     <div>
-        Responsible employees:
+        <p>Assigned to:</p>
         @if (Model.AssignedToUsers.Count == 0)
         {
             <p>None</p>
@@ -43,16 +43,19 @@
             foreach (var user in Model.AssignedToUsers)
             {
                 <p>
-                    @user.UserName
+                    @user
                 </p>
             }
         }
     </div>
     <hr />
-    <div class="row">
-        <a href="\Tasks\Edit\@Model.Id" class="btn btn-sm btn-primary col-md-1 col-md-offset-5">Edit</a>
-        <a href="\Tasks\Delete\@Model.Id" class="btn btn-sm btn-danger col-md-1">Delete</a>
-    </div>
+    @if (User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
+    {
+        <div class="row">
+            <a href="\Tasks\Edit\@Model.Id" class="btn btn-sm btn-primary col-md-1 col-md-offset-5">Edit</a>
+            <a href="\Tasks\Delete\@Model.Id" class="btn btn-sm btn-danger col-md-1">Delete</a>
+        </div>
+    }
     <br />
 </div>
 <br />
@@ -80,7 +83,7 @@
     }
 </div>
 <br />
-@if (User.Identity.IsAuthenticated && Model.AssignedToUsers.Contains(this.Page.CurrentUser)||User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
+@if ((User.Identity.IsAuthenticated && Model.AssignedToUsers.Contains(System.Web.HttpContext.Current.User.Identity.Name)) || User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
 {
     @Html.Partial("~/Views/Shared/_AddComment.cshtml", new CommentViewModel(Model.Id))
 }

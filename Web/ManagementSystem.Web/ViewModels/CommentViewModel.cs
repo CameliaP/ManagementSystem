@@ -33,9 +33,11 @@ namespace ManagementSystem.Web.ViewModels
 
         public string AuthorName { get; set; }
 
+        public CommentType Type { get; set; }
+
         public DateTime DateAdded { get; set; }
 
-        public int PreviousCommentsCount { get; set; }
+        public DateTime? ReminderDate { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

@@ -28,13 +28,14 @@ namespace ManagementSystem.Web.ViewModels
 
         public TaskType Type { get; set; }
 
-        public ICollection<User> AssignedToUsers { get; set; }
+        public ICollection<string> AssignedToUsers { get; set; }
 
         public IList<CommentViewModel> Comments { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Task, TaskViewModel>()
+                .ForMember(tm => tm.AssignedToUsers, opt => opt.MapFrom(t => t.AssignedToUsers.Select(u=>u.UserName)))
                 .ReverseMap();
         }
     }

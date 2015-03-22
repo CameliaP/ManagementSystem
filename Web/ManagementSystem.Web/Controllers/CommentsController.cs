@@ -40,6 +40,10 @@ namespace ManagementSystem.Web.Controllers
                 newComment.Author = this.UserProfile;
                 newComment.TaskId = taskId;
                 newComment.Content = comment.Content;
+                if (comment.ReminderDate != null)
+                {
+                    newComment.ReminderDate = comment.ReminderDate;
+                }
 
                 this.Data.Comments.Add(newComment);
                 this.Data.SaveChanges();

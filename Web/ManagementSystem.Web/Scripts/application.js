@@ -2,11 +2,31 @@
     $('.datetimepicker').datetimepicker({
         format: 'MM/DD/YYYY'
     });
+
     $('.edit-comment').click(function () {
         var commentContentDiv = $(this).parent().prev()
             .find('.content').first();
         commentContentDiv.hide();
     })
+
+    $('a').click(function () {
+        var href = $(this).attr('href');
+
+        // Redirect only after 500 milliseconds
+        if (!$(this).data('timer')) {
+            $(this).data('timer', setTimeout(function () {
+                window.location = href;
+            }, 500));
+        }
+        return false; // Prevent default action (redirecting)
+    });
+
+    $('a').dblclick(function () {
+        clearTimeout($(this).data('timer'));
+        $(this).data('timer', null);
+
+        return false;
+    });
 })
 
 function showCommentSanitizeError(data) {
@@ -20,6 +40,7 @@ function showCommentSanitizeError(data) {
 function successAddedComment() {
     $('#comment-error>ul>li').hide();
     $('#comment-content').val('');
+    $('#comments-label').html('');
 }
 
 function successDeleteComment(data) {

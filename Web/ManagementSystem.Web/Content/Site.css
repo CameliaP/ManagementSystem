@@ -58,7 +58,7 @@ p {
 
 .list-group-item {
     padding: 0;
-    color:#000000;
+    color: #000000;
 }
 
     .list-group-item > hr:first-of-type {
@@ -108,8 +108,8 @@ p {
     font-style: italic;
 }
 
-.mt20{
-    margin-top:20px;
+.mt20 {
+    margin-top: 20px;
 }
 
 .mt100 {
@@ -117,7 +117,7 @@ p {
 }
 
 .btn-manager {
-    padding:10px;
+    padding: 10px;
     max-width: 200px;
     color: white;
     height: 100px;
@@ -131,19 +131,23 @@ p {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
 }
 
-.manager-notes{
-     max-width: 200px;
+.manager-notes {
+    max-width: 200px;
 }
 
-    .btn-manager h6 {
-        white-space: normal;
-        line-height:2;
-    }
+.btn-manager h6 {
+    white-space: normal;
+    line-height: 2;
+}
 
-    .btn-manager p {
-        padding:0;
-    }
+.btn-manager p {
+    padding: 0;
+}
 
-    .text-important{
-        background-color:#ff5e5e;
-    }
+.text-important {
+    background-color: #ff5e5e;
+}
+
+.overflow-visible {
+    overflow: visible;
+}

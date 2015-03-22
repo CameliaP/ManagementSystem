@@ -30,7 +30,13 @@
 
         else
         {
-            <h2 class="text-center">Dashboard</h2>
+
+            <h2 class="text-center">
+                Dashboard  @if (User.IsInRole(GlobalConstants.ManagerRole))
+                {
+                    <span> (all tasks)</span>
+                }
+            </h2>
             for (int row = 0; row < rows; row++)
             {
                 <div class="row">
@@ -51,17 +57,17 @@
     </div>
     @if (User.Identity.IsAuthenticated)
     { }
-    @if (User.IsInRole(GlobalConstants.ManagerRole)){
-    <div class="col-md-3 mt100 col-md-offset-1">
-        <a href="\Tasks\Create" class="btn btn-lg pull-right btn-manager">
-            <p class="text-center">Create new task</p>
-            <h6 class="text-center">As a manager you can create new tasks</h6>
-        </a>
-        
-        <p class="pull-right text-center mt20 manager-notes">
-            See details of any task to edit or delete it.
-        </p>
-    </div>
+    @if (User.IsInRole(GlobalConstants.ManagerRole))
+    {
+        <div class="col-md-3 mt100 col-md-offset-1">
+            <a href="\Tasks\Create" class="btn btn-lg pull-right btn-manager">
+                <p class="text-center">Create new task</p>
+                <h6 class="text-center">As a manager you can create new tasks</h6>
+            </a>
+
+            <p class="pull-right text-center mt20 manager-notes">
+                See details of any task to edit or delete it.
+            </p>
+        </div>
     }
 </div>
-
