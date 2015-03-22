@@ -29,10 +29,22 @@
                             @Html.EnumDropDownListFor(c => c.Type, new { @class = "form-control form-control-sm" })
                         </div>
                     </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.ReminderDate, "Reminder Date", new { @class = "col-sm-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(c => c.ReminderDate, new { @class = "form-control form-control-sm datetimepicker" })
+                            <em>(optional)</em>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2 col-md-offset-10 pr0">
-                <input type="submit" class="btn btn-xs btn-block btn-success mt5 mb5" value="Save changes" id="btn-edit-comment" />
+            <div class="row">
+                <div class="col-md-2 col-md-offset-9 pr0">
+                    <input type="submit" class="btn btn-xs btn-block btn-success mt5 mb5" value="Save changes" id="btn-edit-comment" />
+                </div>
+                <div class="col-md-1">
+                    <btn class="btn btn-xs btn-default edit-cancel">Cancel</btn>
+                </div>
             </div>
         }
 

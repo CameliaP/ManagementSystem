@@ -1,15 +1,26 @@
 ﻿$(document).ready(function () {
-    $('.datetimepicker').datetimepicker({
-        format: 'MM/DD/YYYY'
+    $('body').on('focus',".datetimepicker", function(){
+        $(this).datetimepicker({
+            format: 'MM/DD/YYYY'
+        })
     });
 
-    $('.edit-comment').click(function () {
-        var commentContentDiv = $(this).parent().prev()
+    $(document).on('click', '.btn-edit-comment', function () {
+        var commentContentDiv = $(this).parent().parent().prev()
             .find('.content').first();
         commentContentDiv.hide();
     })
 
-    $('.task-in-list').dblclick(function () {
+    $(document).on('click', '.edit-cancel', function () {
+        var commentContentDiv = ($(this).parent().parent().parent().parent().parent()).prev();
+        var commentId = commentContentDiv.attr('id').split('-')[2];
+        var editForm = ($(this).parent().parent().parent().parent().parent())
+        commentContentDiv.show();
+        $('<div id="comment-content-edit-' + commentId + '"></div>').insertAfter(commentContentDiv);
+        editForm.remove();
+    })
+
+    $(document).on('dbclick', '.task-in-list', function () {
         var taskId = $(this).attr('id').split('-')[1];
         window.location.href = '/Tasks/Details/' + taskId;
     });

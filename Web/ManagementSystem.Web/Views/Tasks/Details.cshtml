@@ -48,15 +48,16 @@
                 }
             }
         </div>
-        @if (User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
-        {
-            <hr />
-            <div class="row">
-                <a href="\Tasks\Edit\@Model.Id" class="btn btn-sm btn-primary col-md-1 col-md-offset-5">Edit</a>
-                <a href="\Tasks\Delete\@Model.Id" class="btn btn-sm btn-danger col-md-1">Delete</a>
-            </div>
-            <br />
-        }
+
+        <hr />
+        <div class="text-center">
+            @if (User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
+            {
+                <a href="\Tasks\Edit\@Model.Id" class="btn btn-sm btn-primary">Edit</a>
+                <a href="\Tasks\Delete\@Model.Id" class="btn btn-sm btn-danger">Delete</a>
+            }
+            <a href="\Tasks\Index" class="btn btn-sm btn-default"><small>Back to all tasks</small></a>
+        </div>
     </div>
 </div>
 <br />
@@ -72,7 +73,7 @@
     }
     else
     {
-        <div class="panel panel-body panel-comments-content" id="panel-comments-content">
+        <div class="panel-body panel-comments-content" id="panel-comments-content">
             <div id="all-comments">
                 @foreach (var comment in @Model.Comments)
                 {

@@ -76,9 +76,13 @@
             else
             {
                 <h2 class="text-center">
-                    Dashboard  @if (User.IsInRole(GlobalConstants.ManagerRole))
+                    @if (User.IsInRole(GlobalConstants.ManagerRole))
                     {
-                        <span> (all tasks)</span>
+                        <span> Manager Dashboard (all tasks)</span>
+                    }
+                    else
+                    {
+                        <span> Dashboard </span>
                     }
                 </h2>
 

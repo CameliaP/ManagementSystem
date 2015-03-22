@@ -92,6 +92,7 @@ namespace ManagementSystem.Web.Controllers
 
                 existingComment.Content = comment.Content;
                 existingComment.Type = comment.Type;
+                existingComment.ReminderDate = comment.ReminderDate;
 
                 this.Data.Comments.Update(existingComment);
                 this.Data.SaveChanges();
