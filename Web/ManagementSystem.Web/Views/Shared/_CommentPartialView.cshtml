@@ -22,21 +22,16 @@
                     new AjaxOptions
                     {
                         HttpMethod = "GET",
-                        UpdateTargetId = "comment-content-"+@Model.Id,
+                        UpdateTargetId = "comment-content-" + @Model.Id,
                         InsertionMode = InsertionMode.ReplaceWith,
-                        //OnSuccess = "successEditCommentGet",
-                        //OnFailure = "showCommentSanitizeError"
+                        
                     },
                     new { @class = "form-horizontal inline-forms", role = "form" }))
                 {
-                    <button type="submit" class="no-border">
+                    <button type="submit" class="no-border btn-edit-comment">
                         <i class="glyphicon glyphicon glyphicon-pencil"></i>
                     </button>
                 }
-
-                @*<a href="#" class="icon edit-comment">
-                    <span class="glyphicon glyphicon glyphicon-pencil"></span>
-                </a>*@
 
                 @using (Ajax.BeginForm("Delete", "Comments",
                     new { commentId = @Model.Id },
@@ -45,18 +40,15 @@
                         UpdateTargetId = "comment-content-" + @Model.Id,
                         InsertionMode = InsertionMode.ReplaceWith,
                         OnSuccess = "successDeleteComment(this)",
-                        //OnFailure = "showCommentSanitizeError"
                     },
                     new { @class = "form-horizontal inline-forms", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <button type="submit" class="no-border">
+                    <button type="submit" class="no-border ">
                         <i class="glyphicon glyphicon glyphicon-remove"></i>
                     </button>
                 }
-                @*<a href="#" class="icon delete-comment">
-                    <span class="glyphicon glyphicon glyphicon-remove"></span>
-                </a>*@
+                
             </div>
             <div class="clearfix"></div>
         </div>

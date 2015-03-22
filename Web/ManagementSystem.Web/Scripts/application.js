@@ -9,23 +9,9 @@
         commentContentDiv.hide();
     })
 
-    $('a').click(function () {
-        var href = $(this).attr('href');
-
-        // Redirect only after 500 milliseconds
-        if (!$(this).data('timer')) {
-            $(this).data('timer', setTimeout(function () {
-                window.location = href;
-            }, 500));
-        }
-        return false; // Prevent default action (redirecting)
-    });
-
-    $('a').dblclick(function () {
-        clearTimeout($(this).data('timer'));
-        $(this).data('timer', null);
-
-        return false;
+    $('.task-in-list').dblclick(function () {
+        var taskId = $(this).attr('id').split('-')[1];
+        window.location.href = '/Tasks/Details/' + taskId;
     });
 })
 
@@ -42,6 +28,7 @@ function successAddedComment(data) {
     $('#comment-next-action-date').text(newReminderDate);
     $('#comment-error>ul>li').hide();
     $('#comment-content').val('');
+    $('#ReminderDate').val('');
     $('#comments-label').html('');
 }
 

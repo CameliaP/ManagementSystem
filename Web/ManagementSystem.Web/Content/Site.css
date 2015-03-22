@@ -56,14 +56,18 @@ p {
     padding-left: 10px;
 }
 
-.list-group-item {
+.task-as-block {
     padding: 0;
     color: #000000;
 }
 
-    .list-group-item > hr:first-of-type {
-        margin-top: 0;
-    }
+.task-in-list:hover{
+    background-color:#dbdbdb;
+}
+
+.list-group-item > hr:first-of-type {
+    margin-top: 0;
+}
 
 .pl10 {
     padding-left: 10px;

@@ -7,56 +7,57 @@
 
 <h1>Task @Model.Id Details</h1>
 
-<div class="list-group-item task-details-list">
-    <p>
-        <strong>Description: </strong> @Model.Description
-    </p>
-    <hr />
-    <p>
-        Status: @Model.Status
-    </p>
-    <hr />
-    <p>
-        Type: @Model.Type
-    </p>
-    <hr />
-    <p>
-        Created on: @Model.CreatedOnDate.ToString("MM/dd/yyyy")
-    </p>
-    <hr />
-    <p>
-        Required by: @Model.RequiredByDate.ToString("MM/dd/yyyy")
-    </p>
-    <hr />
-    <p>
-        Next action on: <span id="comment-next-action-date">@(@Model.NextActionDate == null ? "None" : @Model.NextActionDate.Value.ToString("MM/dd/yyyy"))</span>
-</p>
-    <hr />
-    <div>
-        <p>Assigned to:</p>
-        @if (Model.AssignedToUsers.Count == 0)
-        {
-            <p>None</p>
-        }
-        else
-        {
-            foreach (var user in Model.AssignedToUsers)
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong class="panel-title">Description: </strong> @Model.Description
+    </div>
+    <div class="panel-body">
+        <p>
+            Status: @Model.Status
+        </p>
+        <hr />
+        <p>
+            Type: @Model.Type
+        </p>
+        <hr />
+        <p>
+            Created on: @Model.CreatedOnDate.ToString("MM/dd/yyyy")
+        </p>
+        <hr />
+        <p>
+            Required by: @Model.RequiredByDate.ToString("MM/dd/yyyy")
+        </p>
+        <hr />
+        <p>
+            Next action on: <span id="comment-next-action-date">@(@Model.NextActionDate == null ? "None" : @Model.NextActionDate.Value.ToString("MM/dd/yyyy"))</span>
+        </p>
+        <hr />
+        <div>
+            <p>Assigned to:</p>
+            @if (Model.AssignedToUsers.Count == 0)
             {
-                <p>
-                    @user
-                </p>
+                <p>None</p>
             }
+            else
+            {
+                foreach (var user in Model.AssignedToUsers)
+                {
+                    <p>
+                        @user
+                    </p>
+                }
+            }
+        </div>
+        @if (User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
+        {
+            <hr />
+            <div class="row">
+                <a href="\Tasks\Edit\@Model.Id" class="btn btn-sm btn-primary col-md-1 col-md-offset-5">Edit</a>
+                <a href="\Tasks\Delete\@Model.Id" class="btn btn-sm btn-danger col-md-1">Delete</a>
+            </div>
+            <br />
         }
     </div>
-    <hr />
-    @if (User.IsInRole(ManagementSystem.Common.GlobalConstants.ManagerRole))
-    {
-        <div class="row">
-            <a href="\Tasks\Edit\@Model.Id" class="btn btn-sm btn-primary col-md-1 col-md-offset-5">Edit</a>
-            <a href="\Tasks\Delete\@Model.Id" class="btn btn-sm btn-danger col-md-1">Delete</a>
-        </div>
-    }
-    <br />
 </div>
 <br />
 <div class="panel panel-tasks p0">
@@ -67,7 +68,6 @@
         </div>
         <div class="panel panel-body panel-comments-content" id="panel-comments-content">
             <div id="all-comments"></div>
-
         </div>
     }
     else

@@ -91,6 +91,7 @@ namespace ManagementSystem.Web.Controllers
                     .FirstOrDefault(c => c.Id == comment.Id);
 
                 existingComment.Content = comment.Content;
+                existingComment.Type = comment.Type;
 
                 this.Data.Comments.Update(existingComment);
                 this.Data.SaveChanges();

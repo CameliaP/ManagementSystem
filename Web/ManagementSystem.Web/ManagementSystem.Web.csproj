@@ -262,10 +262,10 @@
     <Content Include="Views\Shared\_CommentPartialView.cshtml" />
     <Content Include="Views\Shared\_EditComment.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Shared\_ListedTaskView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

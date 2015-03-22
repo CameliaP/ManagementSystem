@@ -4,7 +4,7 @@
 
 <div class="task-simple-wrapper">
     <a href="~/Tasks/Details/@Model.Id" title="See details">
-        <div class="list-group-item @(@Model.Type==TaskType.Common?string.Empty:Model.Type==TaskType.Important?"text-important":"text-emergency")">
+        <div class="list-group-item task-as-block @(@Model.Type==TaskType.Common?string.Empty:Model.Type==TaskType.Important?"text-important":"text-emergency")">
             <p class="task-desc">
                 <strong>Description: </strong> @(@Model.Description.Length > 10 ? @Model.Description.Substring(0, 10) + "..." : @Model.Description)
             </p>
@@ -20,10 +20,10 @@
             <p>
                 Next action on: @(@Model.NextActionDate == null ? "No information" : @Model.NextActionDate.Value.ToString("MM/dd/yyyy"))
             </p>
-            <hr />
+            @*<hr />
             <p>
                 Comments: @Model.Comments.Count
-            </p>
+            </p>*@
         </div>
     </a>
 </div>
