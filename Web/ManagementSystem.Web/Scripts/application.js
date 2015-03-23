@@ -20,10 +20,15 @@
         editForm.remove();
     })
 
-    $(document).on('dbclick', '.task-in-list', function () {
+    $('.task-in-list').dblclick(function () {
         var taskId = $(this).attr('id').split('-')[1];
-        window.location.href = '/Tasks/Details/' + taskId;
-    });
+            window.location.href = '/Tasks/Details/' + taskId;
+    })
+
+    //$(document).on('dbclick', '.task-in-list', function () {
+    //    var taskId = $(this).attr('id').split('-')[1];
+    //    window.location.href = '/Tasks/Details/' + taskId;
+    //});
 
     $(document).on('change', '#select-task-type', function () {
         var allTaskBlocksContainers = $('.task-simple-wrapper').parent();
