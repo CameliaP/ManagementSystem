@@ -5,8 +5,7 @@ namespace ManagementSystem.Data.Models
 {
     public enum TaskStatus
     {
-        Created,
-        Ongoing,
+        Opened,
         Overdue,
         Delayed,
         Closed,

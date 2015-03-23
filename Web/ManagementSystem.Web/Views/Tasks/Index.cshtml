@@ -6,8 +6,8 @@
 @{
     ViewBag.Title = "Index";
     ViewBag.SearchQuery = Request.QueryString["query"];
-    var rows = Math.Ceiling((double)Model.Count());
-    var columns = GlobalConstants.ColumnsOnMainTaskPage;
+    ViewBag.StartDate = Request.QueryString["startDate"];
+    ViewBag.EndDate = Request.QueryString["endDate"];
 }
 
 @if (TempData["Success"] != null)
@@ -30,13 +30,26 @@
             <option value="emergency">Emergency</option>
         </select>
     </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "Tasks", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="form-group">
+                <input type="text" class="form-control date-filter datetimepicker" id="startDate" name="startDate" placeholder="Start date...">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control date-filter datetimepicker" id="endDate" name="endDate" placeholder="End date...">
+            </div>
+            <button type="submit" class="btn btn-default"><small>Filter by required by date</small></button>
+        }
+
+    </div>
 </div>
 
 <br />
 <div class="row">
     @if (User.IsInRole(GlobalConstants.ManagerRole))
     {
-        <div class="col-md-3 mt100">
+        <div class="col-md-3 mt60">
             <a href="\Tasks\Create" class="btn btn-lg pull-right btn-manager">
                 <p class="text-center">Create new task</p>
                 <h6 class="text-center">As a manager you can create new tasks</h6>
@@ -105,28 +118,23 @@
                         <span> Dashboard </span>
                     }
                 </h2>
-
-                foreach (var task in Model)
-                {
-                    <div class="pull-left task-container">@Html.Partial("_SimpleTaskView", task)</div>
-                }
-            
-                @*for (int row = 0; row < rows; row++)
-                {
-                    <div class="row">
-                        @for (int col = 0; col < columns; col++)
+                    if (ViewBag.StartDate != null && ViewBag.EndDate!=null)
+                    {
+                        if (ViewBag.StartDate==string.Empty)
                         {
-                            var currentIndex = columns * row + col;
-                            if (currentIndex < Model.Count)
-                            {
-                                <div class="col-md-@(12/columns)">
-                                    @Html.Partial("_SimpleTaskView", Model[currentIndex])
-                                </div>
-                            }
+                            ViewBag.StartDate="today";
                         }
-                    </div>
-                    <br />
-                }*@
+                        else if (ViewBag.EndDate == string.Empty)
+                        {
+                            ViewBag.EndDate = "today";
+                        }
+                        <div>Tasks with required by dates between @ViewBag.StartDate and @ViewBag.EndDate </div>
+                    }
+                    foreach (var task in Model)
+                    {
+                        <div class="pull-left task-container">@Html.Partial("_SimpleTaskView", task)</div>
+                    }
+
             }
         }
     </div>

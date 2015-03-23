@@ -116,8 +116,8 @@ p {
     margin-top: 20px;
 }
 
-.mt100 {
-    margin-top: 100px;
+.mt60 {
+    margin-top: 60px;
 }
 
 .btn-manager {
@@ -167,4 +167,8 @@ p {
 .task-container{
     padding:5px;
     width:33%;
+}
+
+.date-filter{
+    max-width:100px;
 }

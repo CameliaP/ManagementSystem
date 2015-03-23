@@ -20,7 +20,7 @@ namespace ManagementSystem.Web.Controllers
         }
 
         // GET: Tasks
-        public ActionResult Index(string query)
+        public ActionResult Index(string query, DateTime? startDate, DateTime? endDate)
         {
             var allTasks = this.Data.Tasks
                 .All();
@@ -33,6 +33,19 @@ namespace ManagementSystem.Web.Controllers
             if (!(query == null || query.Trim() == String.Empty))
             {
                 allTasks = allTasks.Where(t => t.Comments.Any(c => c.Content.Contains(query)));
+            }
+
+            if (startDate != null || endDate != null)
+            {
+                if (startDate == null)
+                {
+                    startDate = DateTime.Now;
+                }
+                else if (endDate == null)
+                {
+                    endDate = DateTime.Now;
+                }
+                allTasks = allTasks.Where(t => t.RequiredByDate >= startDate && t.RequiredByDate <= endDate);
             }
 
             var allTasksModel = allTasks.Project()
