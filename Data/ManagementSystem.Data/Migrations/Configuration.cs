@@ -48,13 +48,14 @@ namespace ManagementSystem.Data.Migrations
                 this.userManager = new UserManager<User>(new UserStore<User>(context));
                 while (usersInDb < minUsers)
                 {
-                    var nextUserNumber = usersInDb;
+                    var nextUserNumber = 1;
                     var user = new User();
                     user.Email = "user" + nextUserNumber.ToString() + "@com.com";
                     user.UserName = user.Email;
                     this.userManager.Create(user, "111111");
                     context.SaveChanges();
                     usersInDb = context.Users.Count();
+                    nextUserNumber++;
                 }
             }
 
