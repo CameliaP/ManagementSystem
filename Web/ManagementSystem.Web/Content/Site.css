@@ -159,3 +159,7 @@ p {
 .overflow-visible {
     overflow: visible;
 }
+
+#comment-error{
+    font-size:0.8em;
+}

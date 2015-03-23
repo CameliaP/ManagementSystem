@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $('body').on('focus',".datetimepicker", function(){
+    $('body').on('focus', ".datetimepicker", function () {
         $(this).datetimepicker({
             format: 'MM/DD/YYYY'
         })
@@ -26,12 +26,14 @@
     });
 })
 
-function showCommentSanitizeError(data) {
+function showCommentError(data) {
     $('#comment-error>ul>li').hide();
-    $('<h4 class="text-danger">' + data.responseJSON.errorMessage + '</h4>')
+    $.when($('<h4 class="text-danger" id="comment-error-message">' + data.responseJSON.errorMessage + '</h4>')
         .insertBefore('#comment-error')
         .delay(2500)
-        .fadeOut();
+        .fadeOut()).done(function () {
+            $('#comment-error-message').remove();
+        })
 }
 
 function successAddedComment(data) {

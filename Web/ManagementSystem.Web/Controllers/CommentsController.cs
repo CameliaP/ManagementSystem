@@ -26,6 +26,23 @@ namespace ManagementSystem.Web.Controllers
         [Authorize]
         public ActionResult Add(int taskId, CommentViewModel comment)
         {
+            if (comment.ReminderDate!=null)
+            {
+                if (comment.ReminderDate < DateTime.Now)
+                {
+                    return this.JsonError("Reminder date can not be in the past.");
+                }
+
+                var task = this.Data.Tasks.GetById(comment.TaskId);
+                var requiredByDate = task.RequiredByDate;
+
+                if (!ValidateReminderDate(comment.ReminderDate.Value, requiredByDate))
+                {
+                    return this.JsonError("Reminder date can not be after Required By Date.");
+                }
+            }
+           
+            
             if (comment != null && ModelState.IsValid)
             {
                 if (this.sanitizer.Sanitize(comment.Content) != comment.Content)
@@ -79,6 +96,7 @@ namespace ManagementSystem.Web.Controllers
         [Authorize]
         public ActionResult Edit(int taskId, CommentViewModel comment)
         {
+
             if (comment != null && ModelState.IsValid)
             {
                 if (this.sanitizer.Sanitize(comment.Content) != comment.Content)
@@ -121,6 +139,14 @@ namespace ManagementSystem.Web.Controllers
             }
 
             return this.JsonError("Unexpexted error");
+        }
+
+        public bool ValidateReminderDate(DateTime reminderDate, DateTime requiredByDate){
+            if (reminderDate>requiredByDate)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
