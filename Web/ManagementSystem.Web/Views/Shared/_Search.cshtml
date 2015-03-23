@@ -2,10 +2,9 @@
     ViewBag.SearchQuery = Request.QueryString["query"];
 }
 
-<div class="row">
     @using (Html.BeginForm("Index", "Tasks", FormMethod.Get))
     {
-        <div class="input-group col-md-4">
+        <div class="input-group">
             <input type="text" class="form-control" name="query" value="@ViewBag.SearchQuery" placeholder="Search in comments...">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit" title="Search in comments">
@@ -14,5 +13,4 @@
             </span>
         </div>
     }
-</div>
 

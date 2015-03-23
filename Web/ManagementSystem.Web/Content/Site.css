@@ -163,3 +163,8 @@ p {
 #comment-error{
     font-size:0.8em;
 }
+
+.task-container{
+    padding:5px;
+    width:33%;
+}

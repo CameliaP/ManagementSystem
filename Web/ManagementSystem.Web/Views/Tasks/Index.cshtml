@@ -18,8 +18,20 @@
         </div>
     </div>
 }
+<div class="row">
+    <div class="col-md-4">
+        @Html.Partial("_Search")
+    </div>
+    <div class="col-md-2">
+        <select class="form-control" id="select-task-type">
+            <option value="all">All Types</option>
+            <option value="common">Common</option>
+            <option value="important">Important</option>
+            <option value="emergency">Emergency</option>
+        </select>
+    </div>
+</div>
 
-@Html.Partial("_Search")
 <br />
 <div class="row">
     @if (User.IsInRole(GlobalConstants.ManagerRole))
@@ -94,7 +106,12 @@
                     }
                 </h2>
 
-                for (int row = 0; row < rows; row++)
+                foreach (var task in Model)
+                {
+                    <div class="pull-left task-container">@Html.Partial("_SimpleTaskView", task)</div>
+                }
+            
+                @*for (int row = 0; row < rows; row++)
                 {
                     <div class="row">
                         @for (int col = 0; col < columns; col++)
@@ -109,7 +126,7 @@
                         }
                     </div>
                     <br />
-                }
+                }*@
             }
         }
     </div>

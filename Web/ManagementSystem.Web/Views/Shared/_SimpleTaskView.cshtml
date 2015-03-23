@@ -2,7 +2,7 @@
 @using ManagementSystem.Data.Models
 @model TaskViewModel
 
-<div class="task-simple-wrapper">
+<div class="task-simple-wrapper task-@Model.Type">
     <a href="~/Tasks/Details/@Model.Id" title="See details">
         <div class="list-group-item task-as-block @(@Model.Type==TaskType.Common?string.Empty:Model.Type==TaskType.Important?"text-important":"text-emergency")">
             <p class="task-desc">

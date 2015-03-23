@@ -24,6 +24,24 @@
         var taskId = $(this).attr('id').split('-')[1];
         window.location.href = '/Tasks/Details/' + taskId;
     });
+
+    $(document).on('change', '#select-task-type', function () {
+        var allTaskBlocksContainers = $('.task-simple-wrapper').parent();
+        var selectedValue = $(this).val();
+        allTaskBlocksContainers.hide();
+        if (selectedValue==="all") {
+            allTaskBlocksContainers.show();
+        }
+        else if (selectedValue === "common") {
+            $('.task-Common').parent().show();
+        }
+        else if (selectedValue === "important") {
+            $('.task-Important').parent().show();
+        }
+        else {
+            $('.task-Emergency').parent().show();
+        }
+    })
 })
 
 function showCommentError(data) {
