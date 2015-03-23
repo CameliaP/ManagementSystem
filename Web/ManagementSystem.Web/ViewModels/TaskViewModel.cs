@@ -8,9 +8,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ManagementSystem.Web.ViewModels
 {
-    public class TaskViewModel : IMapFrom<Task>, IHaveCustomMappings
+    public class TaskViewModel : IMapFrom<Task>, IHaveCustomMappings, IValidatableObject
     {
-       
+
         public int Id { get; set; }
 
         public DateTime CreatedOnDate { get; set; }
@@ -35,8 +35,26 @@ namespace ManagementSystem.Web.ViewModels
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Task, TaskViewModel>()
-                .ForMember(tm => tm.AssignedToUsers, opt => opt.MapFrom(t => t.AssignedToUsers.Select(u=>u.UserName)))
+                .ForMember(tm => tm.AssignedToUsers, opt => opt.MapFrom(t => t.AssignedToUsers.Select(u => u.UserName)))
                 .ReverseMap();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.RequiredByDate < DateTime.Now)
+            {
+
+                yield return new ValidationResult("Required By Date can not be in the past.", new[] { "RequiredByDate" });
+
+            }
+
+            if (this.NextActionDate != null)
+            {
+                if (this.NextActionDate < DateTime.Now || this.NextActionDate > RequiredByDate)
+                {
+                    yield return new ValidationResult("Next Action Date must be between current and Required By Date.", new[] { "NextActionDate" });
+                }
+            }
         }
     }
 }

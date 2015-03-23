@@ -87,7 +87,11 @@ namespace ManagementSystem.Web.Controllers
                 TempData["Success"] = "A new task was created";
                 return RedirectToAction("Index", "Tasks");
             }
-
+            model.AllUsers = this.Data.Users
+               .All()
+               .Project()
+               .To<UserViewModel>()
+               .ToList();
             return View(model);
         }
 
