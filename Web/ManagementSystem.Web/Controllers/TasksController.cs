@@ -124,13 +124,6 @@ namespace ManagementSystem.Web.Controllers
                 return new HttpNotFoundResult("Task not found");
             }
 
-            //TODO If allowed to add additional properties
-
-            //if (existingTaskModel.Author != this.UserProfile.UserName)
-            //{
-            //    return new HttpNotFoundResult("You are not the author of this task!");
-            //}
-
             return View(existingTaskModel);
         }
 
@@ -149,11 +142,6 @@ namespace ManagementSystem.Web.Controllers
                 existingTask.NextActionDate = taskModel.NextActionDate;
                 existingTask.Type = taskModel.Type;
                 existingTask.Status = taskModel.Status;
-
-                //existingTask.Comments = this.Data.Comments
-                //    .All()
-                //    .Where(r => r.TaskId == existingTask.Id)
-                //    .ToList();
 
                 this.Data.Tasks.Update(existingTask);
                 this.Data.SaveChanges();
@@ -181,13 +169,6 @@ namespace ManagementSystem.Web.Controllers
                 return new HttpNotFoundResult("Task not found");
             }
 
-            //TODO If allowed to add additional properties
-
-            //if (existingTaskModel.Author != this.UserProfile.UserName)
-            //{
-            //    return new HttpNotFoundResult("You are not the author of this task!");
-            //}
-
             return View(existingTaskModel);
         }
 
@@ -201,11 +182,6 @@ namespace ManagementSystem.Web.Controllers
                 var existingTask = this.Data
                    .Tasks
                    .GetById(taskModel.Id);
-
-                //existingTask.Comments = this.Data.Comments
-                //    .All()
-                //    .Where(r => r.TaskId == existingTask.Id)
-                //    .ToList();
 
                 this.Data.Tasks.Delete(existingTask);
                 this.Data.SaveChanges();
@@ -235,12 +211,6 @@ namespace ManagementSystem.Web.Controllers
             }
 
             var taskModel = Mapper.Map<Task, TaskViewModel>(existingTask);
-            //TODO If allowed to add additional properties
-
-            //if (existingTaskModel.Author != this.UserProfile.UserName)
-            //{
-            //    return new HttpNotFoundResult("You are not the author of this task!");
-            //}
 
             taskModel.Comments = Mapper.Map<ICollection<Comment>, IList<CommentViewModel>>(existingTask.Comments);
 
