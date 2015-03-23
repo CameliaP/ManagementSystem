@@ -46,14 +46,17 @@ namespace ManagementSystem.Data.Migrations
             if (usersInDb < minUsers)
             {
                 this.userManager = new UserManager<User>(new UserStore<User>(context));
+                var nextUserNumber = 1;
                 while (usersInDb < minUsers)
                 {
-                    var nextUserNumber = 1;
                     var user = new User();
                     user.Email = "user" + nextUserNumber.ToString() + "@com.com";
-                    user.UserName = user.Email;
-                    this.userManager.Create(user, "111111");
-                    context.SaveChanges();
+                    if (context.Users.FirstOrDefault(u => u.Email == user.Email) == null)
+                    {
+                        user.UserName = user.Email;
+                        this.userManager.Create(user, "111111");
+                        context.SaveChanges();
+                    }
                     usersInDb = context.Users.Count();
                     nextUserNumber++;
                 }
